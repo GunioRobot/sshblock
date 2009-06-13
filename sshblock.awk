@@ -150,4 +150,7 @@ function ip_allow(ip, flag_allow, re_ip, old_str)
 	# Process only accepted/failed login log messages
 	if (match($0, "^.* sshd\\[[[:digit:]]+\\]: (Accepted|Failed) .* for .* from ([[:digit:].]+) port [[:digit:]]+ ssh2$", params))
 		ip_allow(params[2], (params[1]=="Accepted") ? 1 : 0); # Modify hosts.allow
+	# Process "invalid user" messages
+	if (match($0, "^.* sshd\\[[[:digit:]]+\\]: Invalid user .* from ([[:digit:].]+)$", params))
+		ip_allow(params[1], 0); # Modify hosts.allow
 }
