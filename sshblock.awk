@@ -125,7 +125,7 @@ function ip_allow(ip, flag_allow, re_ip, old_str)
 	read_hosts_allow();
 	if (flag_allow){
 		block_deny = remove_ip(block_deny, ip); # Delete deny record
-		block_allow = "sshd: " ip ": allow\n" remove_ip(block_allow, ip); # Move allow record to the beginning
+		block_allow = "ALL: " ip ": allow\n" remove_ip(block_allow, ip); # Move allow record to the beginning
 	}
 	else
 	{
@@ -138,7 +138,7 @@ function ip_allow(ip, flag_allow, re_ip, old_str)
 			}
 			else
 			{
-				block_deny = COUNTER "sshd: " ip ": deny\n" block_deny; # Add new record with counter to the beginning
+				block_deny = COUNTER "ALL: " ip ": deny\n" block_deny; # Add new record with counter to the beginning
 			}
 		}
 	}
