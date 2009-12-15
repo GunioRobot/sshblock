@@ -153,4 +153,7 @@ function ip_allow(ip, flag_allow, re_ip, old_str)
 	# Process "invalid user" messages
 	if (match($0, "^.* sshd\\[[[:digit:]]+\\]: Invalid user .* from ([[:digit:].]+)$", params))
 		ip_allow(params[1], 0); # Modify hosts.allow
+	# Process "repeated login failures" messages
+	if (match($0, "^.* ftpd\\[[[:digit:]]+\\]: repeated login failures from ([[:digit:].]+)$", params))
+		ip_allow(params[1], 0); # Modify hosts.allow
 }
